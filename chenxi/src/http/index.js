@@ -41,3 +41,18 @@ export function token(token) {
         token: token
     })
 }
+export function login(username,password,number,verify) {
+    return http.post(`/login/login`, {
+        username,password,number,verify
+    })
+}
+export function log(username,password) {
+    return http.post(`/login/log`, {
+        username,password
+    })
+}
+export function verify(name) {
+    return http.post(`/login/verify`, {
+        name
+    })
+}

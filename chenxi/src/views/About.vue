@@ -32,7 +32,7 @@ export default {
 <style lang="less">
     .add{
       cursor: pointer;
-      text-align: right;
+      float: right;
       margin-right: 100px;
       color: rgb(17, 81, 255);
     }

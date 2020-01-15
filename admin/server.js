@@ -19,7 +19,6 @@ setInterval(() => {
             data.forEach((d, i) => {
                 if (d.token == D.token) {
                     if (d.count == D.count) {
-                        console.log(d)
                         data.splice(i, 1)
                     }
                 }
@@ -28,7 +27,7 @@ setInterval(() => {
         writeFile('./json/token.json', JSON.stringify(data))
         Data = data;
     })
-}, 400000000)
+}, 100000)
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8081')
     res.header('Access-Control-Allow-Credentials', true)
@@ -38,6 +37,15 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     readFile('json/storage.json').then((data) => {
         req.storage = JSON.parse(data) || []
+        next()
+    }).catch((err) => {
+        res.status(500);
+        res.send('');
+    })
+})
+app.use((req, res, next) => {
+    readFile('json/user.json').then((data) => {
+        req.user = JSON.parse(data) || []
         next()
     }).catch((err) => {
         res.status(500);

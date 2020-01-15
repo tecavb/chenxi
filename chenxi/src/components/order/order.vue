@@ -42,7 +42,7 @@
 <script>
 // @ is an alias to /src
 import num from "../storage/num";
-import { storlist, order, token } from "../../http/index";
+import { storlist, order } from "../../http/index";
 export default {
   data() {
     return {
@@ -129,7 +129,7 @@ export default {
 }
 .order {
   cursor: pointer;
-  text-align: right;
+  float: right;
   margin-right: 100px;
   color: red;
 }

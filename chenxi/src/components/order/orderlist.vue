@@ -13,7 +13,7 @@
           v-for="(ite,index) in JSON.parse(item.goods)"
           :key="ite.id"
           :title="ite.size+'￥'+ite.pri+'数量'+ite.count+ite.pre"
-        >{{index+1}}.{{ite.color}}{{ite.name}} </span>
+        >{{index+1}}.{{ite.color}}{{ite.name}}</span>
       </td>
       <td>{{priall[ind]}}</td>
       <td @click="dele(ind,item.id)">删除</td>
@@ -22,7 +22,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import { orderlist, orderdele } from "../../http/index";
+import { orderlist, orderdele, token } from "../../http/index";
 export default {
   data() {
     return {
@@ -57,10 +57,19 @@ export default {
   },
   methods: {
     dele(idx, id) {
-      if (confirm("请与本厂商议后再取消订单") == true) {
-        this.ary.splice(idx, 1);
-        orderdele(id);
-      }
+      let t = localStorage.getItem("token");
+      token(t).then(data => {
+        if (data.data.code == 0) {
+          if (confirm("请与本厂商议后再取消订单") == true) {
+            this.ary.splice(idx, 1);
+            orderdele(id);
+          }
+        }else{
+          history.pushState(null,'','/#/log')
+          history.go()
+          alert('请确认登陆状态')
+        }
+      });
     }
   },
   components: {}
