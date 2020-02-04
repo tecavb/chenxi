@@ -1,1 +1,31 @@
-[{"id":1,"time":"2020-1-12","for":"dsd","name":"safq","color":"fssv","count":"1","size":"正常","pri":"110","pre":"qfsasf"},{"id":2,"time":"2020-1-12","for":"dsd","name":"青岛市山东","color":"我的胃","count":"0","size":"正常","pri":"12","pre":"dasd"},{"id":3,"time":"2020-1-12","for":"直接售卖","name":"safq","color":"fssv","count":"1","size":"正常","pri":"11","pre":"qfsasf"},{"id":4,"time":"2020-1-12","for":"直接售卖","name":"青岛市山东","color":"我的胃","count":"1","size":"正常","pri":"11","pre":"dasd"},{"id":5,"time":"2020-1-12","for":"直接售卖","name":"qqw","color":"dwdw","count":"2","size":"正常","pri":"112","pre":"eqw2"},{"id":6,"time":"2020-1-14","for":"直接售卖","name":"wqdsa","color":"qdsadaw","count":"1","size":"正常","pri":"12","pre":"dsa"},{"id":7,"time":"2020-1-14","for":"直接售卖","name":"wqdsa","color":"qdsadaw","count":"1","size":"正常","pri":"12","pre":"dsa"},{"id":8,"time":"2020-1-14","for":"直接售卖","name":"wqdsa","color":"qdsadaw","count":"1","size":"正常","pri":"12","pre":"dsa"},{"id":9,"time":"2020-1-14","for":"直接售卖","name":"wqdsa","color":"qdsadaw","count":"1","size":"正常","pri":"12","pre":"dsa"},{"id":10,"time":"2020-1-14","for":"直接售卖","name":"wqdsa","color":"qdsadaw","count":"1","size":"正常","pri":"12","pre":"dsa"},{"id":11,"time":"2020-1-14","for":"直接售卖","name":"wqe","color":"ewd","count":"1","size":"正常","pri":"11","pre":"dasd"}]
+[{
+    "id": 1,
+    "time": "2020-1-12",
+    "for": "dsd",
+    "name": "safq",
+    "color": "fssv",
+    "count": "1",
+    "size": "正常",
+    "pri": "110",
+    "pre": "qfsasf"
+}, {
+    "id": 2,
+    "time": "2020-1-12",
+    "for": "dsd",
+    "name": "青岛市山东",
+    "color": "我的胃",
+    "count": "0",
+    "size": "正常",
+    "pri": "12",
+    "pre": "dasd"
+}, {
+    "id": 3,
+    "time": "2020-1-12",
+    "for": "直接售卖",
+    "name": "safq",
+    "color": "fssv",
+    "count": "1",
+    "size": "正常",
+    "pri": "11",
+    "pre": "qfsasf"
+}]

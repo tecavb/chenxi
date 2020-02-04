@@ -3,13 +3,13 @@
     用户名
     <input type="text" v-model="name" />
     密码
-    <input type="text" v-model="pass" />
+    <input type="password" v-model="pass" />
     <input type="submit" value="登录" @click="submit" />
   </div>
 </template>
 <script>
 // @ is an alias to /src
-import { log, verify } from "../http/index";
+import { log } from "../http/index";
 export default {
   data() {
     return {
@@ -18,33 +18,30 @@ export default {
     };
   },
   beforeRouteLeave(to, from, next) {
-    history.go();
+    setTimeout(() => {
+      history.go();
+    }, 120);
     next();
   },
   methods: {
     submit() {
-      verify(this.name).then(data => {
-        if (data.data.code == 0) {
-          log(this.name, this.pass)
-            .then(data => {
-              if (data.data.code == 0) {
-                alert("登录成功");
-                history.go(-1);
-                localStorage.setItem("token", data.data.token);
-              } else {
-                alert("用户名或密码错误");
-              }
-            })
-            .catch(() => {
-              alert("网络故障");
-            });
-        } else {
-          alert("账号已登录");
-        }
-      });
+      log(this.name, this.pass)
+        .then(data => {
+          if (data.data.code == 0) {
+            alert("登录成功");
+            history.pushState(null, "", "/about#/about");
+            history.go();
+            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("name", this.name);
+          } else {
+            alert("用户名或密码错误");
+          }
+        })
+        .catch(() => {
+          alert("网络故障");
+        });
     }
-  },
-  components: {}
+  }
 };
 </script>
 <style lang="less">

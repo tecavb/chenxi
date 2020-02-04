@@ -1,6 +1,6 @@
 import axios from 'axios';
 const http = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://192.168.68.137:8080',
     timeout: 2000
 })
 export function storlist() {
@@ -41,14 +41,24 @@ export function token(token) {
         token: token
     })
 }
-export function login(username,password,number,verify) {
+export function login(username, password, number, verify) {
     return http.post(`/login/login`, {
-        username,password,number,verify
+        username,
+        password,
+        number,
+        verify
     })
 }
-export function log(username,password) {
+export function log(username, password) {
     return http.post(`/login/log`, {
-        username,password
+        username,
+        password
+    })
+}
+export function orderstate(id, state) {
+    return http.post(`/order/state`, {
+        id,
+        state
     })
 }
 export function verify(name) {

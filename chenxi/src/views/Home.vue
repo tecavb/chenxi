@@ -31,6 +31,6 @@ export default {
   cursor: pointer;
   float: right;
   margin-right: 100px;
-  color: rgb(17, 81, 255);
+  color: blue;
 }
 </style>

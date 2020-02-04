@@ -27,9 +27,9 @@ setInterval(() => {
         writeFile('./json/token.json', JSON.stringify(data))
         Data = data;
     })
-}, 100000)
+}, 4000000)
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:8081')
+    res.header('Access-Control-Allow-Origin', 'http://192.168.68.137:8081')
     res.header('Access-Control-Allow-Credentials', true)
     res.header('Access-Control-Allow-Headers', "Content-Type,X-Agent,X-Token,X-Legacy-Token,X-Legacy-Uid,X-Legacy-Device-Id,X-Legacy-New-Token,X-Request-Id")
     req.method == 'OPTIONS' ? res.send('OK') : next();

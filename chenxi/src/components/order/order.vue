@@ -42,7 +42,7 @@
 <script>
 // @ is an alias to /src
 import num from "../storage/num";
-import { storlist, order } from "../../http/index";
+import { storlist, order, token } from "../../http/index";
 export default {
   data() {
     return {
@@ -65,22 +65,30 @@ export default {
       this.count.splice(id, 1, false);
     },
     send() {
-      let ary = [];
+      let ary = [],
+        t = localStorage.getItem("token"),
+        n = localStorage.getItem("name");
       this.ary.forEach(item => {
         if (item.cho == true) {
           ary.push(item);
         }
       });
-      order(ary, "dasd").then(
-        data => {
-          if (data.data.code == 0) {
-            alert("发送成功");
-          }
-        },
-        () => {
-          alert("稍后重试");
+      token(t).then(data => {
+        if (data.data.code == 0) {
+          order(ary, n).then(
+            data => {
+              if (data.data.code == 0) {
+                alert("发送成功");
+              }
+            },
+            () => {
+              alert("稍后重试");
+            }
+          );
+        }else{
+          alert("请确认登陆状态")
         }
-      );
+      });
     }
   },
   computed: {
@@ -126,12 +134,13 @@ export default {
 .right {
   float: right;
   margin-right: 100px;
+  color: red;
 }
 .order {
   cursor: pointer;
   float: right;
   margin-right: 100px;
-  color: red;
+  color: rgb(7, 187, 247);
 }
 #order {
   .en {

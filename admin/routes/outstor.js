@@ -3,13 +3,13 @@ const express = require('express'),
 const {
     writeFile
 } = require('../promiseFs')
-route.get('/list', (req, res) => {
+route.get('/list', (req, res) => {//获取出库列表
     res.send({
         code: '0',
         data: req.bysell
     })
 })
-route.get('/add', (req, res) => {
+route.get('/add', (req, res) => {//出库
     let {
         name,
         fors,

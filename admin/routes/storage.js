@@ -3,13 +3,13 @@ const express = require('express'),
 const {
     writeFile
 } = require('../promiseFs')
-route.get('/list', (req, res) => {
+route.get('/list', (req, res) => {//获取库存列表
     res.send({
         code: '0',
         data: req.storage
     })
 })
-route.get('/add', (req, res) => {
+route.get('/add', (req, res) => {//添加产品分类
     let {
         name,
         color,
@@ -44,7 +44,7 @@ route.get('/add', (req, res) => {
         code: '0'
     })
 })
-route.get('/change', (req, res) => {
+route.get('/change', (req, res) => {//入库，出库
     let {
         id,
         num,
@@ -64,7 +64,7 @@ route.get('/change', (req, res) => {
         code: '0'
     })
 })
-route.get('/cho', (req, res) => {
+route.get('/cho', (req, res) => {//删除产品类型（可找回）
     let {
         id,
         cho
@@ -85,7 +85,7 @@ route.get('/cho', (req, res) => {
         code: '0'
     })
 })
-route.post('/price', (req, res) => {
+route.post('/price', (req, res) => {//修改价格
     let {
         id,
         pri

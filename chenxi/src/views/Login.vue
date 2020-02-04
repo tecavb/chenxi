@@ -33,6 +33,8 @@ export default {
               alert('验证码错误')
           }else{
               alert('注册成功')
+              history.pushState(null,'','/about')
+              history.go()
           }
       });
     }

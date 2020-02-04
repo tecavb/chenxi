@@ -2,7 +2,7 @@
   <table id="storage">
     <tr>
       <th>
-        <input type="checkbox" v-model="all" />产品名
+        <input type="checkbox" v-model="all" v-if="check" />产品名
       </th>
       <th>颜色</th>
       <th>数量</th>
@@ -13,7 +13,7 @@
     </tr>
     <tr v-for="item in ary" :key="item.id">
       <td>
-        <input type="checkbox" v-model="item.cho" @change="oncho(item.id, item.cho)" />
+        <input type="checkbox" v-model="item.cho" v-if="check" @change="oncho(item.id, item.cho)" />
         {{item.name}}
       </td>
       <td>{{item.color}}</td>
@@ -58,6 +58,7 @@ import { storlist } from "../../http/index";
 import bus from "../../utils/eventbus";
 import num from "./num";
 import { storchange } from "../../http/index"; //id,ac,num
+import { token } from "../../http/index"; //id,ac,num
 import { storpri } from "../../http/index"; //id,pri
 import { storcho } from "../../http/index"; //id
 import { outstor } from "../../http/index"; //name, fors, color, count, size, pri, pre
@@ -67,11 +68,27 @@ export default {
       ary: [],
       minus: [],
       add: [],
-      pri: []
+      pri: [],
+      check: false
     };
   },
   created() {
-    this.request();
+    let t = localStorage.getItem("token");
+    token(t).then(data => {
+      if (data.data.code == 0 && /1$/.test(t)) {
+        this.request();
+        this.check = true;
+        this.$emit('add')
+      } else {
+        storlist().then(data => {
+          data.data.data.forEach(item => {
+            if (item.cho == true) {
+              this.ary.push(item);
+            }
+          });
+        });
+      }
+    });
     bus.$on("addary", this.addary);
   },
   computed: {
@@ -113,11 +130,13 @@ export default {
       });
     },
     onshow(id, d) {
-      d == "c"
-        ? this.minus.splice(id, 1, true)
-        : d == "a"
-        ? this.add.splice(id, 1, true)
-        : this.pri.splice(id, 1, true);
+      if (this.check) {
+        d == "c"
+          ? this.minus.splice(id, 1, true)
+          : d == "a"
+          ? this.add.splice(id, 1, true)
+          : this.pri.splice(id, 1, true);
+      }
     },
     onminus(id, num) {
       this.ary.forEach(item => {
@@ -135,8 +154,8 @@ export default {
               item.pri,
               item.pre
             );
-          }else{
-            alert('库存不足！')
+          } else {
+            alert("库存不足！");
           }
         }
       });

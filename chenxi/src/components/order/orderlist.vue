@@ -3,6 +3,7 @@
     <tr>
       <th>订单时间</th>
       <th>货物名称</th>
+      <th>订单状态</th>
       <th>总价</th>
       <th>删除订单</th>
     </tr>
@@ -15,6 +16,7 @@
           :title="ite.size+'￥'+ite.pri+'数量'+ite.count+ite.pre"
         >{{index+1}}.{{ite.color}}{{ite.name}}</span>
       </td>
+      <td>{{item.state}}</td>
       <td>{{priall[ind]}}</td>
       <td @click="dele(ind,item.id)">删除</td>
     </tr>
@@ -30,10 +32,11 @@ export default {
     };
   },
   created() {
+    let n = localStorage.getItem("name");
     orderlist().then(data => {
       this.ary = [];
       data.data.data.forEach(item => {
-        if (item.for == "dasd") {
+        if (item.for == n) {
           this.ary.push(item);
         }
       });
@@ -60,14 +63,19 @@ export default {
       let t = localStorage.getItem("token");
       token(t).then(data => {
         if (data.data.code == 0) {
-          if (confirm("请与本厂商议后再取消订单") == true) {
+          if (this.ary[idx].state == "正在处理") {
+            if (confirm("请与本厂商议后再取消订单") == true) {
+              this.ary.splice(idx, 1);
+              orderdele(id);
+            }
+          } else if (this.ary[idx].state == "等待配送") {
+            alert("当前状态不可取消订单");
+          } else {
             this.ary.splice(idx, 1);
             orderdele(id);
           }
-        }else{
-          history.pushState(null,'','/#/log')
-          history.go()
-          alert('请确认登陆状态')
+        } else {
+          alert("请确认登陆状态");
         }
       });
     }

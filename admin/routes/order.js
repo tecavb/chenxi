@@ -3,7 +3,7 @@ const express = require('express'),
 const {
     writeFile
 } = require('../promiseFs')
-route.get('/order', (req, res) => {
+route.get('/order', (req, res) => { //添加订单
     let {
         ary,
         fors
@@ -25,7 +25,7 @@ route.get('/order', (req, res) => {
         "id": data + 1,
         "time": Date1,
         "for": fors,
-        "state": "正在处理",
+        "state": "等待处理",
         "goods": ary
     })
     writeFile('./json/order.json', JSON.stringify(req.order))
@@ -33,13 +33,29 @@ route.get('/order', (req, res) => {
         code: '0'
     })
 })
-route.get('/list', (req, res) => {
+route.get('/list', (req, res) => { //获取订单列表
     res.send({
         code: '0',
         data: req.order
     })
 })
-route.get('/dele', (req, res) => {
+route.post('/state', (req, res) => { //改变订单状态
+    let {
+        id,
+        state
+    } = req.body
+    req.order.forEach(item => {
+        if (item.id == id) {
+            item.state = state
+        }
+    })
+    writeFile('./json/order.json', JSON.stringify(req.order))
+    res.send({
+        code: '0',
+        data: req.order
+    })
+})
+route.get('/dele', (req, res) => { //删除列表
     let {
         id
     } = req.query;
